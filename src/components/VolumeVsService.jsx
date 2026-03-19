@@ -8,6 +8,43 @@ const data = [
   { label: 'E', volume: 155, service: 115 },
 ];
 
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (!active || !payload || !payload.length) return null;
+
+  const service = payload.find(p => p.dataKey === "service")?.value || 0;
+  const volumeTop = payload.find(p => p.dataKey === "volumeTop")?.value || 0;
+
+  const volume = service + volumeTop; // ✅ real total volume
+
+  return (
+    <div className="bg-white border border-[#F1F1F4] rounded-xl p-3 shadow-md text-xs min-w-[120px]">
+      <p className="font-semibold text-[#151D48] mb-2">{label}</p>
+
+      {/* Volume */}
+      <div className="flex items-center justify-between gap-3 mb-1">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-sm bg-[#1E88E5]" />
+          <span className="text-[#737791]">Volume</span>
+        </div>
+        <span className="font-semibold text-[#151D48]">
+          {volume}
+        </span>
+      </div>
+
+      {/* Service */}
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-sm bg-[#16C784]" />
+          <span className="text-[#737791]">Service</span>
+        </div>
+        <span className="font-semibold text-[#151D48]">
+          {service}
+        </span>
+      </div>
+    </div>
+  );
+};
 export default function VolumeVsService() {
   const chartData = data.map(d => ({
     ...d,
@@ -39,6 +76,11 @@ export default function VolumeVsService() {
               stackId="a"
               fill="#1E88E5"
               radius={[4, 4, 0, 0]}
+            />
+            <Tooltip
+              content={<CustomTooltip />}
+              cursor={{ fill: "transparent" }}
+              wrapperStyle={{ outline: "none" }}
             />
           </BarChart>
         </ResponsiveContainer>

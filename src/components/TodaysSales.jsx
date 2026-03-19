@@ -1,3 +1,8 @@
+import CustomerIcon from "../icons/CustomerIcon";
+import OrderIcon from "../icons/OrderIcon";
+import ProductIcon from "../icons/ProductIcon";
+import SalesIcon from "../icons/SalesIcon";
+import GraphIcon from "./ui/GraphIcon";
 // Figma assets for icons
 const ICON_SALES = "https://www.figma.com/api/mcp/asset/52e82765-3143-4b18-9015-6091155dbe47";
 const ICON_ORDER = "https://www.figma.com/api/mcp/asset/f8708f19-d412-45c1-985d-43d879f39a33";
@@ -13,8 +18,7 @@ const ICON_SALES_IMG = "https://www.figma.com/api/mcp/asset/54ff4935-e3b1-4a4b-b
 const cards = [
   {
     bg: '#FFE2E5',
-    icon: ICON_SALES,
-    iconImg: ICON_SALES_IMG,
+    icon: SalesIcon,
     value: '$1k',
     label: 'Total Sales',
     change: '+8% from yesterday',
@@ -22,8 +26,7 @@ const cards = [
   },
   {
     bg: '#FFF4DE',
-    icon: ICON_ORDER,
-    iconImg: ICON_ORDER_IMG,
+    icon: OrderIcon,
     value: '300',
     label: 'Total Order',
     change: '+5% from yesterday',
@@ -31,8 +34,7 @@ const cards = [
   },
   {
     bg: '#DCFCE7',
-    icon: ICON_PRODUCTS,
-    iconImg: ICON_PRODUCT_IMG,
+    icon: ProductIcon,
     value: '5',
     label: 'Product Sold',
     change: '+1,2% from yesterday',
@@ -40,7 +42,7 @@ const cards = [
   },
   {
     bg: '#F3E8FF',
-    icon: ICON_CUSTOMER,
+    icon: CustomerIcon,
     iconImg: ICON_CUSTOMER_IMG,
     value: '8',
     label: 'New Customers',
@@ -81,9 +83,14 @@ export default function TodaysSales() {
           >
             {/* Top row */}
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 relative shrink-0">
-                <img src={card.icon} className="w-full h-full rounded-full" />
-                <img src={card.iconImg} className="absolute inset-[22%] w-1/2 h-1/2" />
+              <div className="shrink-0">
+                {card.icon && (
+                  typeof card.icon === 'string' ? (
+                    <img src={card.icon} alt="" className="w-9 h-9" />
+                  ) : (
+                    <card.icon />
+                  )
+                )}
               </div>
 
               <div className="flex flex-col">

@@ -22,15 +22,19 @@ const data = [
 
 export default function CustomerSatisfaction() {
   return (
-    <div className="card p-3 sm:p-5 h-full flex flex-row sm:flex-col justify-between">
-      <h2 className="font-poppins font-semibold text-[15px] sm:text-[16px] leading-6 text-[#05004E] mb-2">
+    <div className="card p-3 sm:p-5 h-full flex flex-col justify-between">
+
+      <h2 className="font-poppins font-semibold text-[14px] sm:text-[16px] leading-6 text-[#05004E] mb-2">
         Customer Satisfaction
       </h2>
 
+      <div className="flex-1 min-h-[160px] sm:min-h-[190px]">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={data}
+            margin={{ top: 10, right: 5, left: 0, bottom: 0 }} // ❗ removed negative margin
+          >
 
-      <div className="flex-1">
-        <ResponsiveContainer width="100%" height={190}>
-          <AreaChart data={data} margin={{ top: 10, right: 0, left: -30, bottom: 0 }}>
             {/* Gradients */}
             <defs>
               <linearGradient id="blueFade" x1="0" y1="0" x2="0" y2="1">
@@ -50,46 +54,35 @@ export default function CustomerSatisfaction() {
               dataKey="month"
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#96A5B8", fontSize: 11 }}
+              tick={{ fill: "#96A5B8", fontSize: 10 }} // smaller on mobile
+              interval="preserveStartEnd"
             />
 
-            {/* Remove YAxis for cleaner design */}
             <YAxis hide />
 
             <Tooltip />
 
-            {/* Areas FIRST (background fade) */}
-            <Area
-              type="natural"
-              dataKey="thisMonth"
-              fill="url(#blueFade)"
-              stroke="none"
-            />
+            {/* Areas */}
+            <Area type="natural" dataKey="thisMonth" fill="url(#blueFade)" stroke="none" />
+            <Area type="natural" dataKey="lastMonth" fill="url(#greenFade)" stroke="none" />
 
-            <Area
-              type="natural"
-              dataKey="lastMonth"
-              fill="url(#greenFade)"
-              stroke="none"
-            />
-
-            {/* Lines ON TOP */}
+            {/* Lines */}
             <Line
               type="natural"
               dataKey="thisMonth"
               stroke="#0095FF"
-              strokeWidth={3}
-              dot={{ r: 5, fill: "#0095FF" }}
-              activeDot={{ r: 6 }}
+              strokeWidth={2} // smaller for mobile
+              dot={{ r: 3 }}
+              activeDot={{ r: 5 }}
             />
 
             <Line
               type="natural"
               dataKey="lastMonth"
               stroke="#00E096"
-              strokeWidth={3}
-              dot={{ r: 5, fill: "#00E096" }}
-              activeDot={{ r: 6 }}
+              strokeWidth={2}
+              dot={{ r: 3 }}
+              activeDot={{ r: 5 }}
             />
 
           </AreaChart>
@@ -98,11 +91,10 @@ export default function CustomerSatisfaction() {
 
       {/* Divider + Stats */}
       <div className="border-t border-[#F8F9FA] pt-2 mt-2">
-        <div className="flex items-center justify-around text-[12px]">
+        <div className="flex flex-wrap sm:flex-nowrap items-center justify-between sm:justify-around gap-2 text-[12px]">
 
           {/* Last Month */}
-          <div className="flex items-center gap-1.5">
-
+          <div className="flex items-center gap-1.5 min-w-[120px]">
             <svg width="15" height="7" viewBox="0 0 22 9" fill="none">
               <path d="M1.5 4.5H20.5" stroke="#0080DA" strokeWidth="3" strokeLinecap="round" />
               <circle cx="11" cy="4.5" r="4.5" fill="#0095FF" />
@@ -118,11 +110,10 @@ export default function CustomerSatisfaction() {
             </div>
           </div>
 
-          <div className="w-px h-4 bg-[#F8F9FA]" />
+          <div className="hidden sm:block w-px h-4 bg-[#F8F9FA]" />
 
           {/* This Month */}
-          <div className="flex items-center gap-1.5">
-
+          <div className="flex items-center gap-1.5 min-w-[120px]">
             <svg width="15" height="7" viewBox="0 0 22 9" fill="none">
               <path d="M1.5 4.5H20.5" stroke="#05C283" strokeWidth="3" strokeLinecap="round" />
               <circle cx="11" cy="4.5" r="4.5" fill="#07E098" />
@@ -140,6 +131,7 @@ export default function CustomerSatisfaction() {
 
         </div>
       </div>
+
     </div>
   );
 }

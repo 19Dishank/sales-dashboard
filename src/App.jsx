@@ -9,7 +9,6 @@ import TargetVsReality from './components/TargetVsReality';
 import TopProducts from './components/TopProducts';
 import SalesMapping from './components/SalesMapping';
 import VolumeVsService from './components/VolumeVsService';
-import GetPro from './components/GetPro';
 
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);

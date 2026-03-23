@@ -691,20 +691,3 @@ For questions or support, please create an issue in the repository or contact th
 ---
 
 **Happy Coding! 🚀**
-| Text Dark | `#151D48` |
-| Text Gray | `#737791` |
-| Background | `#F9FAFB` |
-| Card BG | `#FFFFFF` |
-| Card Border | `#F8F9FA` |
-| Card Shadow | `rgba(238,238,238,0.5)` |
-| Font | Poppins (300–700) |
-| Border Radius | 20px (cards), 16px (inner), 8px (buttons) |
-```
-
-## 📦 Dependencies
-
-- React 18
-- Vite 5
-- Tailwind CSS 3
-- Recharts (charts)
-- Lucide React (icons)
